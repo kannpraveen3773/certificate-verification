@@ -1,0 +1,24 @@
+const express = require("express");
+const cors = require("cors");
+
+const certificateRoutes = require("./routes/certificateRoutes");
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+// Test route
+app.get("/", (req, res) => {
+    res.send("Certificate Verification Backend is Running");
+});
+
+// Certificate API
+app.use("/api/certificates", certificateRoutes);
+
+// Use Render's PORT in deployment
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Backend running on port ${PORT}`);
+});
